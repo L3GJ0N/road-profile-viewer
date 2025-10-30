@@ -10,7 +10,6 @@ for educational purposes). It creates an interactive Dash application that visua
 - Distance information on hover
 """
 
-
 from typing import TypeVar
 
 import numpy as np
@@ -26,8 +25,7 @@ ArrayType = TypeVar("ArrayType", bound=np.ndarray)
 
 
 def generate_road_profile(
-    num_points: int = 100,
-    x_max: float = 80.0
+    num_points: int = 100, x_max: float = 80.0
 ) -> tuple[np.ndarray, np.ndarray]:
     """
     Generate a road profile using a clothoid-like approximation.
@@ -78,7 +76,7 @@ def calculate_ray_line(
     angle_degrees: float,
     camera_x: float = 0.0,
     camera_y: float = 2.0,
-    x_max: float = 80.0
+    x_max: float = 80.0,
 ) -> tuple[np.ndarray, np.ndarray]:
     """
     Calculate the line representing the camera ray.
@@ -131,7 +129,7 @@ def find_intersection(
     y_road: np.ndarray,
     angle_degrees: float,
     camera_x: float = 0.0,
-    camera_y: float = 1.5
+    camera_y: float = 1.5,
 ) -> tuple[float | None, float | None, float | None]:
     """
     Find the intersection point between the camera ray and the road profile.
@@ -264,33 +262,34 @@ def create_dash_app():
             html.Div(
                 [
                     html.H3("Instructions:", style={"color": "#2c3e50"}),
-                    html.Ul([
-                        html.Li("The dark grey line represents the road profile"),
-                        html.Li(
-                            "The red point at (0, 2.0) represents the camera "
-                            "position"
-                        ),
-                        html.Li(
-                            "The blue line shows the camera ray at the specified "
-                            "angle"
-                        ),
-                        html.Li(
-                            "The green point shows where the ray intersects the "
-                            "road"
-                        ),
-                        html.Li(
-                            "Hover over the green point to see the distance from "
-                            "camera to intersection"
-                        ),
-                        html.Li(
-                            "Adjust the angle to see how the intersection point "
-                            "changes"
-                        ),
-                        html.Li(
-                            "Negative angles point downward, positive angles point "
-                            "upward"
-                        ),
-                    ]
+                    html.Ul(
+                        [
+                            html.Li("The dark grey line represents the road profile"),
+                            html.Li(
+                                "The red point at (0, 2.0) represents the camera "
+                                "position"
+                            ),
+                            html.Li(
+                                "The blue line shows the camera ray at the specified "
+                                "angle"
+                            ),
+                            html.Li(
+                                "The green point shows where the ray intersects the "
+                                "road"
+                            ),
+                            html.Li(
+                                "Hover over the green point to see the distance from "
+                                "camera to intersection"
+                            ),
+                            html.Li(
+                                "Adjust the angle to see how the intersection point "
+                                "changes"
+                            ),
+                            html.Li(
+                                "Negative angles point downward, positive angles point "
+                                "upward"
+                            ),
+                        ]
                     ),
                 ],
                 style={
