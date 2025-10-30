@@ -10,7 +10,6 @@ for educational purposes). It creates an interactive Dash application that visua
 - Distance information on hover
 """
 
-
 from typing import TypeVar
 
 import numpy as np
@@ -26,8 +25,7 @@ ArrayType = TypeVar("ArrayType", bound=np.ndarray)
 
 
 def generate_road_profile(
-    num_points: int = 100,
-    x_max: float = 80.0
+    num_points: int = 100, x_max: float = 80.0
 ) -> tuple[np.ndarray, np.ndarray]:
     """
     Generate a road profile using a clothoid-like approximation.
@@ -78,7 +76,7 @@ def calculate_ray_line(
     angle_degrees: float,
     camera_x: float = 0.0,
     camera_y: float = 2.0,
-    x_max: float = 80.0
+    x_max: float = 80.0,
 ) -> tuple[np.ndarray, np.ndarray]:
     """
     Calculate the line representing the camera ray.
@@ -131,7 +129,7 @@ def find_intersection(
     y_road: np.ndarray,
     angle_degrees: float,
     camera_x: float = 0.0,
-    camera_y: float = 1.5
+    camera_y: float = 1.5,
 ) -> tuple[float | None, float | None, float | None]:
     """
     Find the intersection point between the camera ray and the road profile.
@@ -264,33 +262,34 @@ def create_dash_app():
             html.Div(
                 [
                     html.H3("Instructions:", style={"color": "#2c3e50"}),
-                    html.Ul([
-                        html.Li("The dark grey line represents the road profile"),
-                        html.Li(
-                            "The red point at (0, 2.0) represents the camera "
-                            "position"
-                        ),
-                        html.Li(
-                            "The blue line shows the camera ray at the specified "
-                            "angle"
-                        ),
-                        html.Li(
-                            "The green point shows where the ray intersects the "
-                            "road"
-                        ),
-                        html.Li(
-                            "Hover over the green point to see the distance from "
-                            "camera to intersection"
-                        ),
-                        html.Li(
-                            "Adjust the angle to see how the intersection point "
-                            "changes"
-                        ),
-                        html.Li(
-                            "Negative angles point downward, positive angles point "
-                            "upward"
-                        ),
-                    ]
+                    html.Ul(
+                        [
+                            html.Li("The dark grey line represents the road profile"),
+                            html.Li(
+                                "The red point at (0, 2.0) represents the camera "
+                                "position"
+                            ),
+                            html.Li(
+                                "The blue line shows the camera ray at the specified "
+                                "angle"
+                            ),
+                            html.Li(
+                                "The green point shows where the ray intersects the "
+                                "road"
+                            ),
+                            html.Li(
+                                "Hover over the green point to see the distance from "
+                                "camera to intersection"
+                            ),
+                            html.Li(
+                                "Adjust the angle to see how the intersection point "
+                                "changes"
+                            ),
+                            html.Li(
+                                "Negative angles point downward, positive angles point "
+                                "upward"
+                            ),
+                        ]
                     ),
                 ],
                 style={
@@ -368,8 +367,8 @@ def create_dash_app():
                 y=y_road,
                 mode="lines+markers",
                 name="Road Profile",
-                line=dict(color="#4a4a4a", width=3),
-                marker=dict(size=4, color="#4a4a4a"),
+                line={"color": "#4a4a4a", "width": 3},
+                marker={"size": 4, "color": "#4a4a4a"},
                 hovertemplate="Road<br>x: %{x:.2f}<br>y: %{y:.2f}<extra></extra>",
             )
         )
@@ -381,9 +380,9 @@ def create_dash_app():
                 y=[camera_y],
                 mode="markers",
                 name="Camera",
-                marker=dict(
-                    size=12, color="red", symbol="circle"
-                ),  # PEP8 Violation: Missing spaces after commas
+                marker={
+                    "size": 12, "color": "red", "symbol": "circle"
+                },  # PEP8 Violation: Missing spaces after commas
                 hovertemplate="Camera<br>Position: (%{x:.2f}, %{y:.2f})<extra></extra>",
             )
         )
@@ -395,7 +394,7 @@ def create_dash_app():
                 y=y_ray,
                 mode="lines",
                 name=f"Camera Ray ({angle}°)",
-                line=dict(color="blue", width=2, dash="dash"),
+                line={"color": "blue", "width": 2, "dash": "dash"},
                 hovertemplate="Camera Ray<br>x: %{x:.2f}<br>y: %{y:.2f}<extra></extra>",
             )
         )
@@ -409,7 +408,7 @@ def create_dash_app():
                     y=[y_intersect],
                     mode="markers",
                     name="Intersection",
-                    marker=dict(size=15, color="green", symbol="star"),
+                    marker={"size": 15, "color": "green", "symbol": "star"},
                     hovertemplate=(
                         f"Intersection Point<br>"
                         f"Position: ({x_intersect:.2f}, {y_intersect:.2f})<br>"
@@ -430,25 +429,25 @@ def create_dash_app():
             yaxis_title="Y Position (m)",
             hovermode="closest",
             showlegend=True,
-            legend=dict(
-                x=1.02,
-                y=1,
-                xanchor="left",
-                yanchor="top",
-                bgcolor="rgba(255,255,255,0.8)",
-                bordercolor="#dee2e6",
-                borderwidth=1,
-            ),
+            legend={
+                "x": 1.02,
+                "y": 1,
+                "xanchor": "left",
+                "yanchor": "top",
+                "bgcolor": "rgba(255,255,255,0.8)",
+                "bordercolor": "#dee2e6",
+                "borderwidth": 1,
+            },
             plot_bgcolor="#f8f9fa",
-            xaxis=dict(gridcolor="#dee2e6", range=[-2, 82], constrain="domain"),
-            yaxis=dict(
-                gridcolor="#dee2e6",
-                scaleanchor="x",
-                scaleratio=1,
-                range=[-0.5, 10],
-                constrain="domain",
-            ),
-            margin=dict(l=50, r=150, t=30, b=50),
+            xaxis={"gridcolor": "#dee2e6", "range": [-2, 82], "constrain": "domain"},
+            yaxis={
+                "gridcolor": "#dee2e6",
+                "scaleanchor": "x",
+                "scaleratio": 1,
+                "range": [-0.5, 10],
+                "constrain": "domain",
+            },
+            margin={"l": 50, "r": 150, "t": 30, "b": 50},
         )
 
         return fig, info_text
